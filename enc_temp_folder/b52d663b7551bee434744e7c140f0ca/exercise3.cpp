@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 using namespace std;
-
 class Node {
 public:
 	int rollNumber;
@@ -16,7 +15,7 @@ public:
 		LAST = NULL;
 	}
 	void addNode();
-	bool search(int rollno, Node** pangestu, Node** bimo);
+	bool search(int rollno, Node** previous, Node** current);
 	bool listEmpty();
 	bool delNode();
 	void traverse();
@@ -37,15 +36,15 @@ void CircularLinkedList::addNode() { //write your answer here
 	}
 
 }
-bool CircularLinkedList::search(int rollno, Node** pangestu, Node** bimo) {
-	*pangestu = LAST->next;
-	*bimo = LAST->next;
-	while (*bimo != LAST) {
-		if (rollno == (*bimo)->rollNumber) {
+bool CircularLinkedList::search(int rollno, Node** previous, Node** current) {
+	*previous = LAST->next;
+	*current = LAST->next;
+	while (*current != LAST) {
+		if (rollno == (*current)->rollNumber) {
 			return true;
 		}
-		*pangestu = *bimo;
-		*bimo = (*bimo)->next;
+		*previous = *current;
+		*current = (*current)->next;
 	}
 	if (rollno == LAST->rollNumber) {
 		return true;
@@ -67,8 +66,6 @@ bool CircularLinkedList::delNode() { //write your answer here
 
 	if (search(rollno, &pangestu, &bimo) == false)
 		return false;
-	pangestu->next = bimo->next;
-
 }
 void CircularLinkedList::traverse() {
 	if (listEmpty()) {

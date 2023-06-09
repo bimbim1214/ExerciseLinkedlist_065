@@ -67,8 +67,6 @@ bool CircularLinkedList::delNode() { //write your answer here
 
 	if (search(rollno, &pangestu, &bimo) == false)
 		return false;
-	pangestu->next = bimo->next;
-
 }
 void CircularLinkedList::traverse() {
 	if (listEmpty()) {
